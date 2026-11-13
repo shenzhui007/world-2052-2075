@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="zh-CN">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>2052→2075：世界预测探索</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f7f5;
+      --surface: #ffffff;
+      --ink: #203b30;
+      --muted: #526b5e;
+      --accent: #216e57;
+      --line: #dce5df;
+      --editor: #f7faf8;
+      --input: #fff3bf;
+      --input-line: #d6c88d;
+      --future-ink: #80511f;
+      --history-ink: #527460;
+      --history-bg: #f5f8f5;
+      --future-bg: #fff5e7;
+      --grid: #e6ece5;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    [hidden] {
+      display: none !important;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font:
+        15px/1.6 system-ui,
+        "Noto Sans CJK SC",
+        sans-serif;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 18px max(24px, calc((100vw - 1280px) / 2));
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+    header strong {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    header strong span {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0;
+    }
+    a {
+      color: var(--accent);
+      text-underline-offset: 3px;
+    }
+    .guide-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .guide-link:hover {
+      text-decoration: underline;
+    }
+    main {
+      width: 100%;
+      max-width: 1360px;
+      margin: auto;
+      padding: 24px clamp(16px, 3vw, 40px) 40px;
+    }
+    h2,
+    h3,
+    h4 {
+      line-height: 1.4;
+      font-weight: 600;
+    }
+    .graph-title {
+      font-size: 23px;
+      margin: 0 0 18px;
+    }
+    h2 {
+      font-size: 19px;
+      margin: 0;
+    }
+    h3 {
+      font-size: 23px;
+      margin: 0 0 18px;
+    }
+    .subgraph-title {
+      font-size: 19px;
+      margin: 28px 0 12px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+    p {
+      margin: 10px 0;
+      color: var(--muted);
+    }
+    label {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+    ::selection {
+      background: #d6e9de;
+      color: var(--ink);
+    }
+    input {
+      caret-color: var(--accent);
+    }
+    .chart,
+    .tablewrap {
+      scrollbar-color: #9eb9aa var(--editor);
+    }
+    select {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 14px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+    }
+    select:disabled {
+      color: var(--muted);
+      background: #eaf0ec;
+      cursor: default;
+    }
+    button {
+      cursor: pointer;
+    }
+    :is(button, input, select, a, [tabindex]):focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+    button:disabled {
+      cursor: default;
+    }
+    .graph-controls {
+      display: grid;
+      grid-template-columns: minmax(160px, 1fr) minmax(260px, 2fr);
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+    .graph-controls select {
+      margin-top: 6px;
+    }
+    .panel {
+      min-width: 0;
+      padding: 26px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+    }
+    .panel > div:first-child {
+      min-width: 0;
+      width: 100%;
+    }
+    .forecast-open {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+    }
+    .hint {
+      font-size: 13px;
+      margin: 0 0 10px;
+    }
+    .chart {
+      width: 100%;
+      height: auto;
+      position: relative;
+      margin: 8px 0;
+    }
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    svg text {
+      font-variant-numeric: tabular-nums;
+    }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px 10px;
+      margin: 12px 0 0;
+      font-size: 14px;
+    }
+    .legend button {
+      min-height: 44px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: inherit;
+      border-radius: 6px;
+      padding: 6px 8px;
+      text-align: left;
+    }
+    .legend button:not(:disabled):hover {
+      border-color: #b9cfc1;
+    }
+    .legend button:disabled {
+      opacity: 1;
+    }
+    .legend i {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      margin-right: 6px;
+    }
+    .editable-legend[aria-pressed="true"] {
+      border-color: #9fbeac;
+    }
+    .edit-badge {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 12px;
+      margin-left: 7px;
+    }
+    .graph-hover-tip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+      gap: 12px 24px;
+      padding: 14px 16px;
+      margin: 12px 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--editor);
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+    .graph-hover-tip > strong,
+    .graph-hover-tip > span {
+      grid-column: 1/-1;
+    }
+    .graph-hover-tip > div {
+      margin-top: 0 !important;
+      line-height: 1.8;
+    }
+    .graph-hover-tip small {
+      color: var(--muted) !important;
+      font-size: 12px;
+    }
+    .graph-hover-tip b {
+      font-variant-numeric: tabular-nums;
+    }
+    .graph-hover-tip summary {
+      color: var(--accent);
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .graph-hover-tip details {
+      margin-top: 6px;
+      font-size: 13px;
+    }
+    .year-locked {
+      border-color: #a9c4b6;
+    }
+    .year-locked > strong:after {
+      content: " · 已锁定";
+      color: var(--muted);
+      font-weight: 400;
+      font-size: 12px;
+    }
+    .year-unlock {
+      float: right;
+      border: 0;
+      background: transparent;
+      color: var(--accent);
+      font-size: 12px;
+      padding: 0 8px;
+      min-height: 44px;
+    }
+    [data-forecast-slot] {
+      min-width: 0;
+    }
+    [data-forecast-slot]:empty {
+      display: none;
+    }
+    .note {
+      background: var(--editor);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 0;
+      font-size: 14px;
+    }
+    .note h3 {
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+    .note p {
+      font-size: 13px;
+      margin: 10px 0;
+    }
+    .linked-regions,
+    .linked-assumptions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .forecast-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px 20px;
+      flex-wrap: wrap;
+    }
+    .forecast-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    #forecast-storage-status {
+      order: -1;
+      margin: 0 8px 0 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    #forecast-storage-status[data-dirty="true"] {
+      color: #8a5b14;
+    }
+    .action {
+      min-height: 44px;
+      padding: 8px 14px;
+      border: 1px solid var(--accent);
+      border-radius: 7px;
+      font-size: 13px;
+      background: var(--accent);
+      color: #fff;
+    }
+    .action:hover:not(:disabled) {
+      filter: brightness(0.94);
+    }
+    .secondary,
+    #forecast-reset {
+      border-color: #cbd9d0;
+      color: var(--muted);
+      background: transparent;
+    }
+    .action:disabled {
+      opacity: 0.45;
+    }
+    .tablewrap {
+      overflow: auto;
+      max-height: 480px;
+      margin-top: 10px;
+      scrollbar-gutter: stable;
+      scroll-padding-left: 140px;
+      overscroll-behavior: contain;
+    }
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+      width: max-content;
+      min-width: 100%;
+      font-size: 14px;
+      font-variant-numeric: tabular-nums;
+    }
+    th,
+    td {
+      padding: 12px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: right;
+      white-space: nowrap;
+    }
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: var(--editor);
+      font-weight: 500;
+      color: var(--muted);
+    }
+    th:first-child,
+    td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 1;
+      min-width: 140px;
+      width: 140px;
+      max-width: 140px;
+      background: var(--editor);
+      white-space: normal;
+      text-align: left;
+    }
+    thead th:first-child {
+      z-index: 3;
+    }
+    tbody th {
+      font-weight: 400;
+    }
+    td small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .active-column {
+      background: #e5f0e9 !important;
+    }
+    input[type="number"] {
+      min-height: 44px;
+      width: 10ch;
+      padding: 7px 8px;
+      border: 1px solid var(--input-line);
+      border-radius: 5px;
+      color: var(--ink);
+      background: var(--input);
+      font-size: 14px;
+      font-variant-numeric: tabular-nums;
+      appearance: textfield;
+      -moz-appearance: textfield;
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[aria-invalid="true"] {
+      border-color: #a24d32;
+    }
+    .scroll-hint {
+      display: block;
+      text-align: right;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 6px;
+    }
+    #forecast-state {
+      color: #974b27;
+    }
+    #forecast-state:empty {
+      display: none;
+    }
+    .version-bar {
+      display: flex;
+      align-items: end;
+      gap: 12px 18px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .version-bar label {
+      flex: 1;
+      min-width: 220px;
+      max-width: 560px;
+    }
+    .version-bar select {
+      margin-top: 6px;
+    }
+    .version-actions {
+      display: flex;
+      gap: 8px;
+    }
+    #forecast-version-status {
+      flex-basis: 100%;
+      font-size: 13px;
+      margin: 0;
+    }
+    #forecast-version-status:empty {
+      display: none;
+    }
+    .version-help {
+      flex-basis: 100%;
+      font-size: 12px;
+      margin: 0;
+      color: var(--muted);
+    }
+    .chart-nav {
+      display: none;
+    }
+    .chart-nav button {
+      min-height: 44px;
+    }
+    .version-frame {
+      display: block;
+      width: 100%;
+      height: 900px;
+      border: 0;
+    }
+    input[readonly] {
+      background: #edf2ee;
+      border-color: var(--line);
+      color: var(--muted);
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+      border: 0;
+    }
+    @media (max-width: 760px) {
+      header {
+        padding: 16px 20px;
+      }
+      main {
+        padding: 18px 16px 28px;
+      }
+      .panel {
+        padding: 18px;
+      }
+      .forecast-actions {
+        width: 100%;
+      }
+    }
+    @media (max-width: 600px) {
+      .chart {
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+      }
+      .chart svg {
+        width: 700px;
+        min-width: 700px;
+      }
+      .chart-nav {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 6px 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+    }
+    @media (max-width: 480px) {
+      header {
+        padding: 14px 12px;
+        gap: 8px;
+      }
+      header strong {
+        font-size: 19px;
+      }
+      header strong span,
+      .guide-link {
+        font-size: 12px;
+      }
+      main {
+        padding: 14px 10px 24px;
+      }
+      .graph-controls {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      .panel {
+        padding: 14px;
+        border-radius: 10px;
+      }
+      .graph-title,
+      h3 {
+        font-size: 20px;
+        margin-bottom: 12px;
+      }
+      .forecast-open {
+        gap: 18px;
+      }
+      .note {
+        padding: 14px;
+      }
+      .graph-hover-tip {
+        padding: 12px;
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .legend {
+        font-size: 13px;
+        gap: 4px;
+      }
+      .legend button {
+        min-height: 44px;
+      }
+      .forecast-actions {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+      }
+      #forecast-storage-status {
+        grid-column: 1/-1;
+        margin: 0;
+      }
+      .forecast-actions .action {
+        padding: 8px 5px;
+        font-size: 12px;
+      }
+      [data-shared-forecast-controls] .forecast-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      th:first-child,
+      td:first-child {
+        min-width: 112px;
+        width: 112px;
+        max-width: 112px;
+      }
+      .tablewrap {
+        scroll-padding-left: 112px;
+      }
+      input[type="number"] {
+        font-size: 16px;
+        width: 10ch;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto !important;
+      }
+    }
+  .language-switch{display:inline-flex;padding:3px;gap:3px;border:1px solid var(--accent);border-radius:8px;background:var(--surface);flex-shrink:0}.language-toggle{font:inherit;font-size:14px;font-weight:500;padding:7px 10px;background:transparent;color:var(--ink);border:0;border-radius:5px;cursor:pointer;min-height:38px}.language-toggle:hover{background:var(--bg)}.language-toggle.is-selected{background:var(--accent);color:var(--surface);font-weight:700}.language-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:3px}header nav{display:flex;align-items:center;gap:14px;flex-shrink:0}.language-header{display:flex;justify-content:flex-end;max-width:900px;margin:auto;padding:18px 24px 0}@media(max-width:600px){header strong span{display:none}header nav{gap:8px;flex-wrap:wrap;justify-content:flex-end;flex-shrink:1}header .guide-link{font-size:12px}.language-header{padding:16px 16px 0}}.version-bar input[type="text"]{width:100%;min-width:0;max-width:30rem;font:inherit;font-size:16px;padding:10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink)}.version-bar label{min-width:0}.version-bar select{max-width:100%}header strong{overflow-wrap:anywhere}.note p{max-width:75ch}#public-loading .action{margin:6px;white-space:normal}#public-loading iframe{width:100%;border:0}@media(max-width:600px){.version-bar label{flex:1 1 100%;max-width:none}.version-actions{flex:1 1 100%;flex-wrap:wrap}.version-actions button{flex:1;min-height:44px}.note p{font-size:16px}.version-help{font-size:14px}}</style>
+  <header>
+    <strong>2052→2075<span> / 世界预测探索</span></strong
+    ><a href="guide.html" class="guide-link">使用与数据说明 ↗</a>
+  </header>
+  <main>
+    <h1 class="sr-only">2052 · 预测图表与调整</h1>
+    <section id="public-loading" role="status">正在读取本地预测…</section><noscript>请启用JavaScript以查看图表并调整预测。</noscript>
+  </main>
+  <script src="language.js"></script><script src="local-store.js"></script><script src="bootstrap.js"></script></html>

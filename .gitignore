@@ -1,0 +1,14 @@
+/dist/
+/local-assets/
+__pycache__/
+node_modules/
+.env
+.env.*
+*.sqlite*
+*.db
+*.xls*
+*.epub
+*.zip
+*.pem
+*.key
+.DS_Store

@@ -1,0 +1,69 @@
+{
+  "basis": "Author companion workbook: dist/source.xlsx; graph headings in SumWorld column A",
+  "graphTitles": {
+    "1": "Population",
+    "2": "Potential Work Force",
+    "3": "Labour Productivity",
+    "4": "Production (GDP) and Consumption",
+    "5": "Consumption per person",
+    "6": "Energy Use",
+    "7": "Shares of total energy use",
+    "8": "Energy usages (Mtoe/yr)",
+    "9": "CO2 Emissions from Energy Use",
+    "10": "Climate Change",
+    "11": "Food Production",
+    "12": "Non-energy Ecological Footprint",
+    "13": "State of Affairs",
+    "14": "Production",
+    "15": "Standard of Living"
+  },
+  "graphReferences": {
+    "1": "SumWorld!A7",
+    "2": "SumWorld!A53",
+    "3": "SumWorld!A94",
+    "4": "SumWorld!A132",
+    "5": "SumWorld!A196",
+    "6": "SumWorld!A229",
+    "7": "SumWorld!A290",
+    "8": "SumWorld!A315",
+    "9": "SumWorld!A344",
+    "10": "SumWorld!A394",
+    "11": "SumWorld!A431",
+    "12": "SumWorld!A476",
+    "13": "SumWorld!A524",
+    "14": "SumWorld!A552",
+    "15": "SumWorld!A581"
+  },
+  "shared": {
+    "潜在劳动力": "Potential Work Force",
+    "劳动生产率": "Labour Productivity",
+    "人口负担": "Support burden",
+    "总生物承载力": "Total bio-capacity",
+    "剩余生物承载力": "Unused bio-capacity",
+    "人均剩余生物承载力": "Unused bio-capacity per person",
+    "人均非能源生态足迹（NEFPP）": "Nonenergy footprint per person NEFPP",
+    "人均非能源生态足迹变化率": "Rate of change of NEFPP"
+  },
+  "author": {
+    "作物总产量": "Food production",
+    "作物收获面积": "Cultivated land",
+    "耕地面积": "Cultivated land",
+    "平均收获单产": "Gross yield",
+    "人均作物产量": "Food per person",
+    "百万公顷（收获面积，含复种）": "million ha (cropland)",
+    "百万公顷（耕地面积）": "million ha (cropland)",
+    "吨／公顷": "tonnes/ha/year",
+    "非能源生态足迹": "Nonenergy footprint"
+  },
+  "updated": {
+    "作物总产量": "Crop production",
+    "作物收获面积": "Harvested area",
+    "平均收获单产": "Yield per harvested hectare",
+    "人均作物产量": "Crop production per person"
+  },
+  "authorChinese": {
+    "作物收获面积": "耕地面积",
+    "百万公顷（收获面积，含复种）": "百万公顷（耕地面积）",
+    "吨／公顷": "吨／公顷／年"
+  }
+}

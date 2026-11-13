@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-CN">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>2052 · 使用与数据说明</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f7f5;
+      --surface: #ffffff;
+      --ink: #203b30;
+      --muted: #526b5e;
+      --accent: #216e57;
+      --line: #dce5df;
+      --editor: #f7faf8;
+      --input: #fff3bf;
+      --input-line: #d6c88d;
+      --future-ink: #80511f;
+      --history-ink: #527460;
+      --history-bg: #f5f8f5;
+      --future-bg: #fff5e7;
+      --grid: #e6ece5;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font:
+        16px/1.8 system-ui,
+        sans-serif;
+    }
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 30px 24px 70px;
+    }
+    a {
+      color: var(--accent);
+      text-underline-offset: 3px;
+    }
+    a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 600;
+    }
+    h2 {
+      font-size: 20px;
+      margin: 0 0 14px;
+    }
+    section {
+      background: var(--surface);
+      padding: 22px 28px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+    p {
+      margin: 12px 0;
+    }
+  details{margin-top:16px}summary{cursor:pointer;color:var(--accent);text-underline-offset:3px}summary:focus-visible{outline:2px solid var(--accent);outline-offset:4px}li{margin:8px 0}p,li{overflow-wrap:anywhere}.release-note{color:var(--muted);font-size:14px}@media(max-width:600px){main{padding:22px 16px 40px}section{padding:20px}h1{font-size:26px}}.language-switch{display:inline-flex;padding:3px;gap:3px;border:1px solid var(--accent);border-radius:8px;background:var(--surface);flex-shrink:0}.language-toggle{font:inherit;font-size:14px;font-weight:500;padding:7px 10px;background:transparent;color:var(--ink);border:0;border-radius:5px;cursor:pointer;min-height:38px}.language-toggle:hover{background:var(--bg)}.language-toggle.is-selected{background:var(--accent);color:var(--surface);font-weight:700}.language-toggle:focus-visible{outline:2px solid var(--accent);outline-offset:3px}header nav{display:flex;align-items:center;gap:14px;flex-shrink:0}.language-header{display:flex;justify-content:flex-end;max-width:900px;margin:auto;padding:18px 24px 0}@media(max-width:600px){header strong span{display:none}header nav{gap:8px;flex-wrap:wrap;justify-content:flex-end;flex-shrink:1}header .guide-link{font-size:12px}.language-header{padding:16px 16px 0}}[hidden]{display:none!important}</style>
+  <header class="language-header"></header><div id="guide-zh">  <main>
+    <a href="index.html">← 返回预测图表</a>
+    <h1>使用与数据说明</h1>
+    <section>
+      <h2>这个网站做什么</h2>
+      <p>本项目沿用《2052》的预测方法，将情景扩展至2075年。结果取决于假设，不是对未来的保证。项目由个人维护，与原作者及出版方无隶属或背书关系。<a href="https://www.2052.info/" target="_blank" rel="noopener noreferrer">访问《2052》原书网站（英文，新窗口打开）</a>。</p>
+      <p>此源码版从模型默认假设启动，不附带原作者只读档案或维护者保存的情景。扩展部分不代表原作者的新预测。项目开发使用了 AI 辅助。</p>
+    </section>
+    <section>
+      <h2>查看与调整</h2>
+      <p>先选择区域和图表。实线表示历史，虚线表示未来情景；在绘图区查看年份数值、单位和来源，点击可锁定年份，再次点击或按Esc解除。手机上可横向滑动图表和输入表格。</p>
+      <p>黄色数字是可编辑假设，修改后按Enter、Tab或点击其他位置确认。也可选中曲线或图例，再拖动出现的预测点。计算结果由假设联动生成，不能直接修改。“撤销上一步”恢复本页最近的操作。</p>
+      <p><strong>先看年份含义：</strong>增长率及出生、死亡率按五年区间填写，如2025代表2025—2030；能源占比、面积、单产、承载力和气候指标按当年水平填写。能源分项占比合计不能超过100%，煤炭为余额。</p>
+      <details>
+        <summary>键盘操作</summary>
+        <p>图表获得焦点后，← / →切换年份，Home / End跳到首尾，Enter锁定年份。输入框中Enter确认，Esc取消当前输入。非焦点数值最多显示三位小数，聚焦后可编辑完整精度。</p>
+      </details>
+    </section>
+    <section>
+      <h2>保存与版本</h2>
+      <p>修改、拖动、撤销和恢复默认都只改变草稿，刷新可能丢失。请按用途选择保存方式：</p>
+      <ul>
+        <li><strong>保存预测：</strong>保存当前编辑状态，下次打开时继续使用。</li>
+        <li><strong>保存为版本：</strong>命名并留存全部地区、15张图的只读快照，保留当时的数据、假设和结果；不替代“保存预测”。选择版本查看，“返回当前预测”继续编辑草稿。</li>
+      </ul>
+      <p>个人预测和版本<strong>只存于当前浏览器，不上传</strong>。更换设备或浏览器、清除网站数据、结束无痕浏览，或浏览器清理存储后，记录可能丢失；共用浏览器的人也可能看到它们。没有账号、同步或找回服务，分享网址不会携带个人预测。</p>
+      <p>个人版本可删除，公共基准不可删除。空间不足时会提示保存失败，不自动清理旧版本。时间按浏览器本地时区显示，切换时区不改变保存时刻。</p>
+      <p>网站更新不会自动覆盖个人预测。旧版本保留原结果；当前预测需由你选择是否用新版资料重新计算，随后明确保存。</p>
+    </section>
+    <section>
+      <h2>理解数据与结果</h2>
+      <p>数值详情区分<strong>资料值、计算值、估算值和预测值</strong>，并提供来源或直接计算方法。缺失及来源待核实项目保留标记；不同指标的覆盖年份不同，机构资料也可能是估计或暂定值。网站按需维护，不承诺固定更新周期。</p>
+      <p>多指标图可能采用不同纵轴或缩放尺度，曲线交点不代表实际数量相等，请以详情中的数值和单位为准。图10的温升、浓度和海平面为手动情景，当前不会根据能源排放自动重算。</p>
+      <details>
+        <summary>区域、单位与估算口径</summary>
+        <p>区域沿用《2052》的固定成员：全球、中国、美国、OECD（不含美国）、BRISE及世界其他地区。中国含大陆、香港、澳门；美国含本土、波多黎各及美属维尔京群岛；其他地区通常按全球减其余四区计算。</p>
+        <p>金额沿用2005年PPP基期；后期资料可能经过桥接估算，不能与其他PPP基期或市场汇率美元直接比较。2015—2020投资占比以2010锚点结合新版占比变化估算，并非PWT11直接发布的不变价统计。</p>
+        <p>人口负担以“倍”表示；收获面积包含复种，不等于物理耕地面积；作物总重量不等于可食热量。图11沿用原题Food Production；作者版保留Cultivated land和Gross yield，更新版使用Harvested area和Yield per harvested hectare，分别表示含复种的收获面积及按该面积计算的单产，不能与原耕地口径直接比较。海平面统一相对1850年显示。</p>
+        <p>部分区域缺项按同占比估算；OECD的2020年非能源生态足迹约23.37%属于缺项估算，其他地区的残差也继承相关不确定性。具体标记以图表详情为准。</p>
+      </details>
+      <details>
+        <summary>隐私与公开范围</summary>
+        <p>本站没有添加访问统计、广告追踪或反馈表单。自行部署时，所选托管方可能处理IP地址及请求信息。个人预测仍只存于浏览器；来源链接将打开第三方网站。</p>
+        <p>浏览器会下载运行所需的代码、模型和数据，这些内容可被提取。本站不提供原书、原始工作簿、研究下载或维护者数据库。</p>
+      </details>
+    </section>
+    <p class="release-note">网站版本：__RELEASE__。</p>
+  </main>
+</div><div id="guide-en" hidden><main>
+  <a href="index.html">← Back to forecast charts</a>
+  <h1>Guide and data notes</h1>
+  <section>
+    <h2>About this site</h2>
+    <p>This personal project uses the forecasting approach in <em>2052</em> to explore scenarios through 2075. Results depend on assumptions; they are not guarantees. The project is not affiliated with or endorsed by the author or publisher. <a href="https://www.2052.info/" target="_blank" rel="noopener noreferrer">Visit the original 2052 book website (opens in a new tab)</a>.</p>
+    <p>This source edition starts from the model defaults. It does not include the original author’s archived snapshot or the maintainer’s saved scenario. The extension is independent. AI tools assisted in development.</p>
+  </section>
+  <section>
+    <h2>View and edit</h2>
+    <p>Select a region and chart. Solid lines show history; dashed lines show future scenarios. Inspect a year to see its values, units and sources. Click to pin it; click again or press Esc to unpin. On smaller screens, scroll charts and input tables horizontally.</p>
+    <p>Yellow values are editable assumptions. Confirm an edit with Enter, Tab or by moving focus elsewhere. You can also select a curve or its legend and drag the forecast points that appear. Calculated results change with their inputs and cannot be edited directly. Undo restores your latest action on this page.</p>
+    <p><strong>Check what the year means:</strong> growth, birth and death rates describe five-year intervals: 2025 means 2025–2030. Energy shares, area, yield, biocapacity and climate indicators describe levels in the stated year. Energy shares cannot total more than 100%; coal is the remainder.</p>
+    <details><summary>Keyboard controls</summary><p>With the chart focused, use ← / → to change years, Home / End to jump to the endpoints, and Enter to pin a year. In an input, Enter confirms and Esc cancels the current edit. Values display up to three decimal places when unfocused; focus an input to edit its full precision.</p></details>
+  </section>
+  <section>
+    <h2>Saving and versions</h2>
+    <p>Edits, drags, undo and reset affect only your draft. Reloading can discard it. Choose the save action that fits your purpose:</p>
+    <ul>
+      <li><strong>Save forecast:</strong> keep the current editing state for your next visit.</li>
+      <li><strong>Save as version:</strong> name a read-only snapshot covering all regions and 15 charts, with the data, assumptions and results at that time. This does not replace Save forecast. Select a version to view it, then Return to current forecast to resume your draft.</li>
+    </ul>
+    <p>Personal forecasts and versions are <strong>stored only in this browser and never uploaded</strong>. Changing devices or browsers, clearing site data, ending private browsing or automatic browser cleanup may remove them. People sharing the same browser may see them. There are no accounts, sync or recovery services. Sharing the site URL does not share your forecast.</p>
+    <p>You can delete personal versions, but not public baselines. If storage is full, saving reports an error and does not automatically remove old versions. Times use your browser’s local time zone; changing the zone does not change when a save occurred.</p>
+    <p>Site updates do not automatically overwrite personal forecasts. Saved versions retain their original results. You choose whether to recalculate the current forecast with updated data, then explicitly save it.</p>
+  </section>
+  <section>
+    <h2>Reading the data and results</h2>
+    <p>Value details distinguish <strong>published data, calculated values, estimates and forecasts</strong>, with sources or direct calculation methods. Missing and unverified values remain labelled. Coverage differs by indicator, and institutional data may be estimated or provisional. Updates are made as needed, without a fixed schedule.</p>
+    <p>Charts with multiple indicators may use separate axes or scales. Intersecting curves do not mean equal quantities; check the values and units. Graph 10’s warming, concentration and sea-level paths are manually specified scenarios; they are not automatically recalculated from energy emissions.</p>
+    <details><summary>Regions, units and estimates</summary>
+      <p>Regions retain the fixed membership in 2052: World, China, United States, OECD excluding the US, BRISE and the rest of the world. China includes mainland China, Hong Kong and Macao; the US includes the mainland, Puerto Rico and the US Virgin Islands. The rest of the world is generally calculated as the global total minus the other four regions.</p>
+      <p>Monetary values retain the model’s 2005 PPP basis. Later data may be bridged estimates and cannot be compared directly with other PPP bases or market-exchange-rate dollars. Investment shares for 2015–2020 use a 2010 anchor and changes in newer shares; they are not directly published PWT11 constant-price statistics.</p>
+      <p>Support burden is a ratio. Harvested area includes multiple cropping and is not physical cropland area. Crop tonnage is not edible energy. Graph 11 retains the original title Food Production. The author’s version uses Cultivated land and Gross yield; the updated version uses Harvested area and Yield per harvested hectare. Harvested area includes multiple cropping, so its yield measure is not directly comparable with the original cropland-based yield. Sea-level changes use an 1850 reference.</p>
+      <p>Some regional gaps are estimated using the same-share assumption. Around 23.37% of OECD’s 2020 non-energy ecological footprint is estimated for missing coverage; residual values for the rest of the world inherit related uncertainty. Refer to the chart’s specific labels.</p>
+    </details>
+    <details><summary>Privacy and public materials</summary>
+      <p>The site adds no traffic analytics, advertising trackers or feedback forms. If you deploy this site, your hosting provider may process IP addresses and request information. Personal forecasts remain in your browser. Source links lead to third-party websites.</p>
+      <p>Your browser downloads the code, model and data required to run the site, and these can be extracted. The site does not distribute the book, original workbook, research downloads or the maintainer’s database.</p>
+    </details>
+  </section>
+  <p class="release-note">Site version: __RELEASE__. </p>
+</main>
+</div>
+<script src="language.js"></script></html>
